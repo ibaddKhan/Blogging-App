@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Signup</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/daisyui@4.4.12/dist/full.min.css"
+      rel="stylesheet"
+      type="text/css"
+    />
+    <link
+      href="https://cdn.jsdelivr.net/npm/@sweetalert2/theme-dark@4/dark.css"
+      rel="stylesheet"
+    />
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.js"></script>
+  </head>
+
+  <body>
+    <nav class="flex bg-[#7749F8] text-white py-2 justify-between">
+      <div class="ml-8 text-xl">Personal Blogging App</div>
+    </nav>
+
+    <div class="text-black font-bold ml-10 my-5 b text-3xl">Signup</div>
+
+    <div class="hero bg-base-200">
+      <div class="card mt-10 shrink-0 w-full max-w-sm shadow-2xl bg-base-100">
+        <form class="py-[3vh] card-body">
+          <div class="form-control">
+            <label class="label">
+              <span class="label-text">First Name</span>
+            </label>
+            <input
+              id="f-name"
+              type="text"
+              placeholder="First Name"
+              class="input input-bordered"
+              required
+            />
+            <label class="label">
+              <span class="label-text">Last Name</span>
+            </label>
+            <input
+              id="l-name"
+              type="text"
+              placeholder="Last Name"
+              class="input input-bordered"
+              required
+            />
+            <label class="label">
+              <span class="label-text">Email</span>
+            </label>
+            <input
+              id="email"
+              type="text"
+              placeholder="Email"
+              class="input input-bordered"
+              required
+            />
+          </div>
+          <div class="form-control">
+            <label class="label">
+              <span class="label-text">Password</span>
+            </label>
+            <input
+              id="pass"
+              type="password"
+              placeholder="Password"
+              class="input input-bordered"
+              required
+            />
+            <label class="label">
+              <span class="label-text">Repeat Password</span>
+            </label>
+            <input
+              id="r-pass"
+              type="password"
+              placeholder="Repeat Password"
+              class="input input-bordered inline"
+              required
+            />
+          </div>
+          <div class="inline-block">
+            <input
+              class="text-[#7749f8] inline-block"
+              accept="image/*"
+              id="files"
+              type="file"
+            />
+          </div>
+          <a
+            href="./login.html"
+            class="label-text-alt text-sm text-md link link-hover"
+            >Already have an account?</a
+          >
+          <div class="form-control mt-6">
+            <button
+              id="btn"
+              type="submit"
+              class="btn btn-primary text-white bg-[#7749f8]"
+            >
+              Create
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script type="module" src="../scripts/signup.js"></script>
+  </body>
+</html>

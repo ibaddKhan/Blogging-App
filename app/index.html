@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Blogsite</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/daisyui@4.4.12/dist/full.min.css"
+      rel="stylesheet"
+      type="text/css"
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://cdn.jsdelivr.net/npm/@sweetalert2/theme-dark@4/dark.css"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+
+  <body class="bg-gray-100 min-h-screen">
+    <div class="navbar bg-[#7749F8] text-white">
+      <div class="flex-1">
+        <a class="ml-10 text-2xl">Personal Blog App</a>
+      </div>
+      <div class="flex-none gap-2 md:flex">
+        <div class="form-control md:block hidden">
+          <input
+            type="text"
+            placeholder="Search"
+            class="input input-bordered w-24 md:w-auto"
+          />
+        </div>
+        <div tabindex="0" role="button" class="btn btn-ghost btn-circle avatar">
+          <div class="w-12 rounded-full">
+            <a href="../app/profile.html">
+              <img
+                class="userPfp"
+                alt="Profile Photo"
+                src="../assets/defaultuserprofile.png"
+              />
+            </a>
+          </div>
+          <div></div>
+        </div>
+        <div class="flex-none md:block hidden">
+          <ul class="menu menu-horizontal px-1">
+            <li>
+              <details>
+                <summary>Settings</summary>
+
+                <ul class="p-2 bg-base-300 rounded text-black">
+                  <li><a href="dash.html">Dashboard</a></li>
+                  <li><a href="login.html">Login</a></li>
+                  <li><a href="signup.html">Signup</a></li>
+                  <li><a class="logout-btn">Logout</a></li>
+                </ul>
+              </details>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <div
+        class="flex-none block md:hidden cursor-pointer ml-2"
+        id="burger-icon"
+      >
+        <div class="bar1 h-1 w-6 bg-white"></div>
+        <div class="bar2 h-1 w-6 bg-white my-1"></div>
+        <div class="bar3 h-1 w-6 bg-white"></div>
+      </div>
+    </div>
+
+    <div class="hidden" id="mobile-menu">
+      <ul class="flex flex-col gap-2">
+        <li>
+          <ul class="p-2 bg-base-300 rounded text-black">
+            <li><a href="dash.html">Dashboard</a></li>
+            <li><a href="login.html">Login</a></li>
+            <li><a href="signup.html">Signup</a></li>
+            <li><a class="logout-btn">Logout</a></li>
+          </ul>
+        </li>
+      </ul>
+    </div>
+    <div class="">
+      <h1 class="text-4xl bg-white bg-base-200 py-5 px-4"></h1>
+
+      <h1 class="ml-4 mt-4 text-2xl"></h1>
+      <div class="flex my-6 justify-center">
+        <div class="blogs-div"></div>
+      </div>
+    </div>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.js"></script>
+    <script type="module" src="../scripts/index.js"></script>
+  </body>
+</html>
