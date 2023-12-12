@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Blogsite</title>
+    <title>See All</title>
     <link
       href="https://cdn.jsdelivr.net/npm/daisyui@4.4.12/dist/full.min.css"
       rel="stylesheet"
@@ -47,7 +47,7 @@
           </div>
           <div></div>
         </div>
-        <div class="flex-none mr-2 md:block hidden">
+        <div class="flex-none md:block hidden">
           <ul class="menu menu-horizontal px-1">
             <li>
               <details>
@@ -87,16 +87,36 @@
         </li>
       </ul>
     </div>
-    <div class="">
-      <h1 class="text-4xl bg-white bg-base-200 py-5 px-4"></h1>
+    <div>
+      <a
+        href="../app/index.html"
+        class="text-2xl block bg-white text-purple-600 py-5 px-4"
+      >
+        Back to All Blogs
+      </a>
 
       <h1 class="ml-4 mt-4 text-2xl"></h1>
-      <div class="flex my-6 justify-center">
-        <div class="blogs-div"></div>
+      <div class="flex flex-col-reverse md:flex-row justify-center">
+        <div class="flex justify-center">
+          <div class="blogs-div"></div>
+        </div>
+        <div class="sm:flex sm:justify-center flex justify-center md:ml-24">
+          <div class="">
+            <h3 class="" href=""></h3>
+            <h1 class="nameHead font-medium text-xl text-purple-600"></h1>
+            <img
+              class="userImg rounded-xl"
+              width="140px"
+              height="100px"
+              alt=""
+            />
+          </div>
+        </div>
       </div>
     </div>
+
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.js"></script>
-    <script type="module" src="../scripts/index.js"></script>
+    <script type="module" src="../scripts/seeAll.js"></script>
   </body>
 </html>

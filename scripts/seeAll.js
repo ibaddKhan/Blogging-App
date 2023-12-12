@@ -96,7 +96,7 @@ async function render() {
        <div class="mb-4 text-center">
            <img src="${
              item.photoURL
-           }" class="rounded-xl w-32 h-32 mb-4" id="blog-img">
+           }" class="object-contain rounded-xl  w-32 h-32 mb-4" id="blog-img">
        </div>
 <div class="w-1/2">
 <h1 class="  text-3xl text-[#212529]">${item.title}</h1>

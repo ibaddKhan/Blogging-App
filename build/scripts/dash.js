@@ -59,7 +59,6 @@ onAuthStateChanged(auth, (user) => {
 
     form.addEventListener("submit", async (e) => {
       e.preventDefault();
-
       console.log("working");
       try {
         const docRef = await addDoc(collection(db, "newPost"), {

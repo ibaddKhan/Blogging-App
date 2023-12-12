@@ -98,12 +98,10 @@ async function render() {
        <div class="mb-4 text-center">
            <img src="${
              item.photoURL
-           }" class="object-contain	 rounded-xl w-32 h-32 mb-4" id="blog-img">
+           }" class="rounded-xl w-32 h-32 mb-4" id="blog-img">
        </div >
-       <div class="w-1/2">
-       <div>
-       <h1 class="w-30 text-3xl text-[#212529]">${item.title}</h1>
-       </div>
+<div class="w-1/2">
+<h1 class="  text-3xl text-[#212529]">${item.title}</h1>
 <div  class="">
 <h3 class="text-sm mt-1 text-[#6C757D]">${item.displayName}</h5>
 <h3 class="text-sm mt-1  text-[#6C757D]"> ${formatDate(

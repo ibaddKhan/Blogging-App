@@ -19,10 +19,14 @@ import {
 import { auth, storage, db } from "./config.js";
 
 const userPfp = document.querySelector(".userPfp");
-const greetHead = document.querySelector("div h1");
-const div = document.querySelector("div .blogs-div");
+const div = document.querySelector(".blogs-div");
+const specificPfp = document.querySelector("div .userImg");
+const nameDiv = document.querySelector("div h1");
+const emailDiv = document.querySelector("div div div h3");
+const nameHead = document.querySelector("div .nameHead");
 const burgerIcon = document.getElementById("burger-icon");
 const mobileMenu = document.getElementById("mobile-menu");
+const title = document.querySelector("title");
 
 onAuthStateChanged(auth, (user) => {
   document.querySelector(".logout-btn").addEventListener("click", () => {
@@ -55,26 +59,6 @@ onAuthStateChanged(auth, (user) => {
   }
 });
 
-function greetUser() {
-  const currentTime = new Date();
-  const currentHour = currentTime.getHours();
-
-  let greeting;
-
-  if (currentHour >= 5 && currentHour < 12) {
-    greeting = "Good Morning Readers!";
-  } else if (currentHour >= 12 && currentHour < 18) {
-    greeting = "Good Afternoon Readers!";
-  } else if (currentHour >= 18 && currentHour < 24) {
-    greeting = "Good Evening Readers!";
-  } else {
-    greeting = "Good Night Readers!";
-  }
-  greetHead.innerHTML = greeting;
-}
-
-greetUser();
-
 burgerIcon.addEventListener("click", () => {
   mobileMenu.classList.toggle("hidden");
 });
@@ -82,28 +66,40 @@ burgerIcon.addEventListener("click", () => {
 let arr = [];
 
 async function render() {
-  const q = query(collection(db, "newPost"), orderBy("postDate", "desc"));
-
+  const data = localStorage.getItem("userDetails");
+  const userDetails = JSON.parse(data);
+  const userName = userDetails[0].name;
+  const userPhoto = userDetails[0].photoURL;
+  const userEmail = userDetails[0].email;
+  title.innerHTML = `See All from ${userName}`;
+  nameDiv.innerHTML = `All Posts from ${userName}`;
+  nameHead.innerHTML = `${userName}`;
+  emailDiv.innerHTML = `${userEmail}`;
+  specificPfp.src = userPhoto;
+  const userUid = userDetails[0].uid;
+  const q = query(
+    collection(db, "newPost"),
+    orderBy("postDate", "desc"),
+    where("uid", "==", userUid)
+  );
   const querySnapshot = await getDocs(q);
   div.innerHTML = "";
   arr = [];
   querySnapshot.forEach((doc) => {
     arr.push({ ...doc.data(), docId: doc.id });
   });
-  console.log(arr);
+  // console.log(arr);
   arr.forEach((item, index) => {
     div.innerHTML += `
-    <div style="font-family: 'Poppins', sans-serif;" class="bg-white p-8  rounded-lg my-5  shadow-2xl max-w-xl  w-full " >
+    <div style="font-family: 'Poppins', sans-serif;" class="bg-white  p-8 rounded-lg my-5  shadow-2xl max-w-xl  w-full " >
        <div class="flex gap-5">
        <div class="mb-4 text-center">
            <img src="${
              item.photoURL
-           }" class="object-contain	 rounded-xl w-32 h-32 mb-4" id="blog-img">
-       </div >
-       <div class="w-1/2">
-       <div>
-       <h1 class="w-30 text-3xl text-[#212529]">${item.title}</h1>
+           }" class="rounded-xl w-32 h-32 mb-4" id="blog-img">
        </div>
+<div class="w-1/2">
+<h1 class="  text-3xl text-[#212529]">${item.title}</h1>
 <div  class="">
 <h3 class="text-sm mt-1 text-[#6C757D]">${item.displayName}</h5>
 <h3 class="text-sm mt-1  text-[#6C757D]"> ${formatDate(
@@ -117,31 +113,9 @@ async function render() {
    <p  class="text-[#868686]  text-[14px] font-light mt-2 whitespace-normal break-words">
    ${item.caption}
    </p>
-
-   <a id="seeAll" class="cursor-pointer text-amber-500 hover:text-orange-500 absolute right-2 ">See all from this user</a>
    </div>
    </div>
   `;
-  });
-  const seeAll = document.querySelectorAll("#seeAll");
-
-  seeAll.forEach((item, index) => {
-    item.addEventListener("click", () => {
-      console.log("btn clicked at index", index);
-      let detailsArr = [];
-      const obj = {
-        uid: arr[index].uid,
-        name: arr[index].displayName,
-        email: arr[index].email,
-        photoURL: arr[index].photoURL,
-      };
-      console.log(arr[index].photoURL);
-      detailsArr.push(obj);
-
-      const seeAlluid = JSON.stringify(detailsArr);
-      localStorage.setItem("userDetails", seeAlluid);
-      window.location = "../app/seeAll.html";
-    });
   });
 }
 
