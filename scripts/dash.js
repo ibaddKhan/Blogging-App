@@ -71,11 +71,20 @@ onAuthStateChanged(auth, (user) => {
           displayName: user.displayName,
           postDate: Timestamp.fromDate(new Date()),
         });
+        Swal.fire({
+          icon: "success",
+          title: "Published",
+          showConfirmButton: false,
+          timer: 1500,
+        });
         console.log("Document written with ID: ", docRef.id);
       } catch (error) {
         console.log(error.message);
       }
-      render(uid, user);
+
+      setTimeout(() => {
+        render(uid, user);
+      }, 1800);
     });
   } else {
     console.log("not a user");
@@ -105,7 +114,7 @@ async function render(uid, user) {
        <div class="mb-4 text-center">
            <img src="${
              item.photoURL
-           }" class="rounded-xl w-32 h-28 mb-4" id="blog-img">
+           }" class="rounded-xl object-contain w-32 h-28 mb-4" id="blog-img">
        </div >
 <div class="w-1/2">
 <h1 class="  text-3xl w-32 text-[#212529]">${item.title}</h1>

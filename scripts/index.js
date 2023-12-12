@@ -19,10 +19,13 @@ import {
 import { auth, storage, db } from "./config.js";
 
 const userPfp = document.querySelector(".userPfp");
+const filterInp = document.querySelector("#filter-input");
 const greetHead = document.querySelector("div h1");
 const div = document.querySelector("div .blogs-div");
 const burgerIcon = document.getElementById("burger-icon");
 const mobileMenu = document.getElementById("mobile-menu");
+
+let arr = [];
 
 onAuthStateChanged(auth, (user) => {
   document.querySelector(".logout-btn").addEventListener("click", () => {
@@ -37,7 +40,7 @@ onAuthStateChanged(auth, (user) => {
     } else {
       Swal.fire({
         icon: "error",
-        title: "Youre Already Logged Out",
+        title: "You're Already Logged Out",
         showConfirmButton: false,
         timer: 1500,
       });
@@ -47,11 +50,11 @@ onAuthStateChanged(auth, (user) => {
     const uid = user.uid;
     userPfp.src = user.photoURL;
     console.log(uid);
-    render();
+    render(); // Render all data initially
   } else {
     userPfp.src = "../assets/defaultuserprofile.png";
     console.log("No user logged in");
-    render();
+    render(); // Render all data initially
   }
 });
 
@@ -79,8 +82,6 @@ burgerIcon.addEventListener("click", () => {
   mobileMenu.classList.toggle("hidden");
 });
 
-let arr = [];
-
 async function render() {
   const q = query(collection(db, "newPost"), orderBy("postDate", "desc"));
 
@@ -90,39 +91,57 @@ async function render() {
   querySnapshot.forEach((doc) => {
     arr.push({ ...doc.data(), docId: doc.id });
   });
-  console.log(arr);
-  arr.forEach((item, index) => {
-    div.innerHTML += `
-    <div style="font-family: 'Poppins', sans-serif;" class="bg-white p-8  rounded-lg my-5  shadow-2xl max-w-xl  w-full " >
-       <div class="flex gap-5">
-       <div class="mb-4 text-center">
-           <img src="${
-             item.photoURL
-           }" class="object-contain	 rounded-xl w-32 h-32 mb-4" id="blog-img">
-       </div >
-       <div class="w-1/2">
-       <div>
-       <h1 class="w-30 text-3xl text-[#212529]">${item.title}</h1>
-       </div>
-<div  class="">
-<h3 class="text-sm mt-1 text-[#6C757D]">${item.displayName}</h5>
-<h3 class="text-sm mt-1  text-[#6C757D]"> ${formatDate(
-      item.postDate
-    )}</h3></div>
-</div>
-  </div > 
-   
-   <div class=" relative">
-   
-   <p  class="text-[#868686]  text-[14px] font-light mt-2 whitespace-normal break-words">
-   ${item.caption}
-   </p>
 
-   <a id="seeAll" class="cursor-pointer text-amber-500 hover:text-orange-500 absolute right-2 ">See all from this user</a>
-   </div>
-   </div>
-  `;
+  // Render all data initially
+  renderPosts(arr);
+
+  filterInp.addEventListener("input", () => {
+    // Render filtered data when user searches
+    const searchTerm = filterInp.value.toLowerCase();
+    const filteredArr = arr.filter((item) => {
+      return (
+        item.title.toLowerCase().includes(searchTerm) ||
+        item.caption.toLowerCase().includes(searchTerm) ||
+        item.displayName.toLowerCase().includes(searchTerm)
+      );
+    });
+    renderPosts(filteredArr);
   });
+}
+
+function renderPosts(posts) {
+  div.innerHTML = "";
+  posts.forEach((item, index) => {
+    div.innerHTML += `
+      <div style="font-family: 'Poppins', sans-serif;" class="bg-white p-8  rounded-lg my-5  shadow-2xl max-w-xl  w-full " >
+        <div class="flex gap-5">
+          <div class="mb-4 text-center">
+            <img src="${
+              item.photoURL
+            }" class="object-contain	 rounded-xl w-32 h-32 mb-4" id="blog-img">
+          </div >
+          <div class="w-1/2">
+            <div>
+              <h1 class="w-30 text-3xl text-[#212529]">${item.title}</h1>
+            </div>
+            <div  class="">
+              <h3 class="text-sm mt-1 text-[#6C757D]">${item.displayName}</h5>
+              <h3 class="text-sm mt-1  text-[#6C757D]"> ${formatDate(
+                item.postDate
+              )}</h3>
+            </div>
+          </div>
+        </div > 
+        <div class=" relative">
+          <p  class="text-[#868686]  text-[14px] font-light mt-2 whitespace-normal break-words">
+            ${item.caption}
+          </p>
+          <a id="seeAll" class="cursor-pointer text-amber-500 hover:text-orange-500 absolute right-2 ">See all from this user</a>
+        </div>
+      </div>
+    `;
+  });
+
   const seeAll = document.querySelectorAll("#seeAll");
 
   seeAll.forEach((item, index) => {
@@ -156,3 +175,6 @@ function formatDate(timestamp) {
   };
   return dateObject.toLocaleDateString("en-US", options);
 }
+
+// Initial render
+render();
