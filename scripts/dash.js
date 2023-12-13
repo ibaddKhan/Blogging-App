@@ -109,16 +109,16 @@ async function render(uid, user) {
   console.log(arr);
   arr.forEach((item, index) => {
     div.innerHTML += `
-    <div style="font-family: 'Poppins', sans-serif;" class="bg-white p-8 rounded-lg my-5  shadow-2xl max-w-xl ml-40 w-full " >
+    <div style="font-family: 'Poppins', sans-serif;" class="bg-white p-8 rounded-lg my-5  shadow-2xl max-w-xl  w-full " >
        <div class="flex gap-5">
        <div class="mb-4 text-center">
            <img src="${
              item.photoURL
            }" class="rounded-xl object-contain w-32 h-28 mb-4" id="blog-img">
        </div >
-<div class="w-1/2">
-<h1 class="  text-3xl w-32 text-[#212529]">${item.title}</h1>
-<div  class="">
+       <div class="w-1/2">
+       <h1 class="text-3xl flex wrap text-[#212529]">${item.title}</h1>
+       <div  class="">
 <h3 class="text-sm mt-1 text-[#6C757D]">${item.displayName}</h5>
 <h3 class="text-sm mt-1  text-[#6C757D]"> ${formatDate(
       item.postDate

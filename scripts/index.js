@@ -92,11 +92,10 @@ async function render() {
     arr.push({ ...doc.data(), docId: doc.id });
   });
 
-  // Render all data initially
+  console.log(arr);
   renderPosts(arr);
 
   filterInp.addEventListener("input", () => {
-    // Render filtered data when user searches
     const searchTerm = filterInp.value.toLowerCase();
     const filteredArr = arr.filter((item) => {
       return (
