@@ -117,7 +117,6 @@ async function render(uid, user) {
            }" class="rounded-xl object-contain w-32 h-28 mb-4" id="blog-img">
        </div >
        <div class="w-1/2">
-       <h1 class="text-3xl flex wrap text-[#212529]">${item.title}</h1>
        <div  class="">
 <h3 class="text-sm mt-1 text-[#6C757D]">${item.displayName}</h5>
 <h3 class="text-sm mt-1  text-[#6C757D]"> ${formatDate(
